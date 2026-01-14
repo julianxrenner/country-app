@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-const Display = ({countries}) => {
-  if(countries.length === 1){
-    const image = countries[0].flags.png
+const Display = ({ countries, handleShow }) => {
+  if (countries.length === 1) {
+    const image = countries[0].flags.png;
     return (
       <div>
         <h1>{countries[0].name.common}</h1>
@@ -10,27 +10,31 @@ const Display = ({countries}) => {
         <p>Area: {countries[0].area}</p>
         <h2>Languages</h2>
         <ul>
-          {Object.entries(countries[0].languages).map(([key,value])=>(
+          {Object.entries(countries[0].languages).map(([key, value]) => (
             <li key={key}>{value}</li>
           ))}
         </ul>
         <h2>Flag</h2>
         <img src={image} alt="" />
       </div>
-    )
-  }else if(countries.length > 1 && countries.length < 10){
-    return (
-      countries.map((place)=>(
-        <p key={place.name.common}>{place.name.common}</p>
-      ))
-    )
-  }else if(countries.length > 10){
-    return(
-      <p>Too many countries, please give more information</p>
-    )
-  }else{
-    <p>Search a country</p>
+    );
+  } else if (countries.length > 1 && countries.length < 10) {
+    return countries.map((place) => (
+      <p key={place.name.common}>
+        {place.name.common}
+        <button
+          type="input"
+          onClick={(event) => handleShow(event, place.name.common)}
+        >
+          Show
+        </button>
+      </p>
+    ));
+  } else if (countries.length > 10) {
+    return <p>Too many countries, please give more information</p>;
+  } else {
+    <p>Search a country</p>;
   }
-}
+};
 
-export default Display
+export default Display;
