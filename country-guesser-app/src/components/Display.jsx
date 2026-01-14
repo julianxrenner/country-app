@@ -33,7 +33,7 @@ const Display = ({ countries, handleShow }) => {
   } else if (countries.length > 10) {
     return <p>Too many countries, please give more information</p>;
   } else {
-    <p>Search a country</p>;
+    return <p>No more results, search another country</p>;
   }
 };
 
