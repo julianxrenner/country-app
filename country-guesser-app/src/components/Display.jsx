@@ -5,10 +5,15 @@ const Display = ({countries}) => {
     const image = countries[0].flags.png
     return (
       <div>
-        <p>{countries[0].name.common}</p>
+        <h1>{countries[0].name.common}</h1>
         <p>The capital is: {countries[0].capital}</p>
         <p>Area: {countries[0].area}</p>
         <h2>Languages</h2>
+        <ul>
+          {Object.entries(countries[0].languages).map(([key,value])=>(
+            <li key={key}>{value}</li>
+          ))}
+        </ul>
         <h2>Flag</h2>
         <img src={image} alt="" />
       </div>
