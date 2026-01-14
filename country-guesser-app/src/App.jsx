@@ -9,8 +9,12 @@ function App() {
   const [filter, setFilter] = useState([])
 
   useEffect(()=>{
-    countryService.getAllCountries().then(initialCountries => setCountry(initialCountries))
-  }, [])
+    if(country === null){
+      countryService.getAllCountries().then(initialCountries => setCountry(initialCountries))
+    }else{
+      setFilter(country.filter(place => place.name.common.includes(search)))
+    }
+  }, [search])
 
   if(!country){
     return null
@@ -18,14 +22,13 @@ function App() {
 
   const handleSearch = (event) =>{
     setSearch(event.target.value)
-    setFilter(country.filter(place => place.name.common.includes(search)))
   }
   
   return (
     <>
       <div>
         <p>find countries <input type="text" onChange={handleSearch}></input></p>
-      </div>
+      </div> 
       <Display countries={filter}/>
     </>
   )
